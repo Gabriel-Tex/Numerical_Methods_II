@@ -1,9 +1,10 @@
 #include <iostream>
 #include "include/function.h"
-#include "include/diff.h"
+#include "include/diffLimits.h"
 
 using namespace std;
 
+// main para testes
 int main()
 {
     // x, h, filosofia, Fx, ordem da derivada
@@ -25,16 +26,13 @@ int main()
     switch (option)
     {
     case 0:
-        result = forward(x, h, order);
+        result = forwardRec(x, h, order);
         break;
     case 1:
-        result = forward(x, h, order);
+        result = backwardRec(x, h, order);
         break;
     case 2:
-        result = forward(x, h, order);
-        break;
-    default:
-        cout << "Inválido.";
+        result = centralRec(x, h, order);
         break;
     }
 
