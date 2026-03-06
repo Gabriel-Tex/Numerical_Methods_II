@@ -9,6 +9,8 @@ struct derivate
     double error;
 };
 
+derivate firstTaylorDerivation_LinearErrorAndForward(double x, double h);
+
 derivate firstTaylorDerivation_QuadraticErrorAndForward(double x, double h);
 
 derivate firstTaylorDerivation_CubicErrorAndForward(double x, double h);

@@ -17,6 +17,11 @@ double thirdForwardDerivation(double x, double h){
     return ( (1 / pow(h, 3)) * ( F(x+3*h) - 3*F(x+2*h) + 3*F(x+h) - F(x) ) );
 }
 
+double fourthForwardDerivation(double x, double h){
+    // F''''(x) = (F'''(x+h) - F'''(x)) / h
+    return (thirdForwardDerivation(x+h, h) - thirdForwardDerivation(x, h)) / h;
+}
+
 // BACKWARD
 double firstBackwardDerivation(double x, double h){
     return ( F(x) - F(x-h) ) / h;
@@ -26,6 +31,16 @@ double secondBackwardDerivation(double x, double h){
     return ( F(x) - 2*F(x-h) + F(x-2*h) ) / pow(h, 2);
 }
 
+double thirdBackwardDerivation(double x, double h){
+    // F'''(x) = (F''(x) - F''(x-h)) / h
+    return (secondBackwardDerivation(x, h) - secondBackwardDerivation(x-h, h)) / h;
+}
+
+double fourthBackwardDerivation(double x, double h){
+    // F''''(x) = (F'''(x) - F'''(x-h)) / h
+    return (thirdBackwardDerivation(x, h) - thirdBackwardDerivation(x-h, h)) / h;
+}
+
 // CENTRAL
 double firstCentralDerivation(double x, double h){
     return ( F(x+h) - F(x-h) ) / (2*h);
@@ -33,6 +48,16 @@ double firstCentralDerivation(double x, double h){
 
 double secondCentralDerivation(double x, double h){
     return ( F(x+h) - 2*F(x) + F(x-h) ) / (pow(h, 2));
+}
+
+double thirdCentralDerivation(double x, double h){
+    // F'''(x) = (F''(x+h) - F''(x-h)) / 2*h
+    return ( secondCentralDerivation(x+h, h) - secondCentralDerivation(x-h, h) ) / (2*h);
+}
+
+double fourthCentralDerivation(double x, double h){
+    // F''''(x) = (F'''(x+h) - F'''(x-h)) / 2*h
+    return ( thirdCentralDerivation(x+h, h) - thirdCentralDerivation(x-h, h) ) / (2*h);
 }
 // ================ MÉTODOS DE DERIVAÇÃO RECURSIVOS ================
 

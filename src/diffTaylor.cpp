@@ -2,6 +2,17 @@
 #include "../include/diffTaylor.h"
 #include "../include/diffLimits.h"
 
+// Fórmula de Taylor:
+// F(x + h) = F(x) + F'(x)*h + 1/2! * F''(x)*h² + 1/3! * F'''(x)*h³ + ...
+
+derivate firstTaylorDerivation_LinearErrorAndForward(double x, double h){
+
+    derivate firstDerivate;
+    firstDerivate.derivateValue = (F(x+h) - F(x)) / h;
+    firstDerivate.error = -(1/2)*secondForwardDerivation(x, h)*h;
+
+    return firstDerivate;
+}
 
 derivate firstTaylorDerivation_QuadraticErrorAndForward(double x, double h){
     // alfa * 1/2! * F''(x)*h² + beta * 1/2! * F''(x) * 2*h²
@@ -14,13 +25,13 @@ derivate firstTaylorDerivation_QuadraticErrorAndForward(double x, double h){
     return firstDerivate;
 }
 
-// com problema:
 derivate firstTaylorDerivation_CubicErrorAndForward(double x, double h){
     // alfa = -1, beta = 1/2, gama = -1/9
     derivate firstDerivate;
-    firstDerivate.derivateValue = ( (1/3) * F(x+3*h) - (3/2)*F(x+2*h) + 3*F(x + h) - (5/3)*F(x) ) / h;
+    firstDerivate.derivateValue = ( (1/3) * F(x+3*h) - (3/2)*F(x+2*h) + 3*F(x + h) - 2*F(x) ) / h;
 
-    firstDerivate.error = (1/4) * forwardRec(x, h, 4) * pow(h, 3); // O(h³)
+    firstDerivate.error = -(1/4) * fourthForwardDerivation(x, h) * pow(h, 3); // O(h³)
 
     return firstDerivate;
 }
+
