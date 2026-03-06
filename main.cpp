@@ -1,10 +1,11 @@
 #include <iostream>
 #include "include/function.h"
 #include "include/diffLimits.h"
+#include "include/diffTaylor.h"
 
 using namespace std;
 
-// main para testes
+// main somente para testes
 int main()
 {
     // x, h, filosofia, Fx, ordem da derivada

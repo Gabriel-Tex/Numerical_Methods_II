@@ -1,5 +1,5 @@
 #include "../include/function.h"
 
-float F(float x){
+double F(double x){
     return pow(x, 3);
 }

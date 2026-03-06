@@ -1,32 +1,34 @@
 #ifndef DIFFLIMITS_H
 #define DIFFLIMITS_H
 
+#include <cmath>
+
 // ================ MÉTODOS DE DERIVAÇÃO INDIVIDUAIS ================
 // -------- FORWARD, BACKWARD E CENTRAL --------
 
 // FORWARD
-float firstForwardDerivation(float x, float h);
+double firstForwardDerivation(double x, double h);
 
-float secondForwardDerivation(float x, float h);
+double secondForwardDerivation(double x, double h);
     
-float thirdFowardDerivation(float x, float h);
+double thirdForwardDerivation(double x, double h);
 
 // BACKWARD
-float firstBackwardDerivation(float x, float h);
+double firstBackwardDerivation(double x, double h);
     
-float secondBackwardDerivation(float x, float h);
+double secondBackwardDerivation(double x, double h);
 
 // CENTRAL
-float firstCentralDerivation(float x, float h);
+double firstCentralDerivation(double x, double h);
 
-float secondCentralDerivation(float x, float h);
+double secondCentralDerivation(double x, double h);
 // ================ MÉTODOS DE DERIVAÇÃO RECURSIVOS ================
 
 // -------- FORWARD, BACKWARD E CENTRAL --------
-float forwardRec(float x, float h, int order);
+double forwardRec(double x, double h, int order);
 
-float backwardRec(float x, float h, int order);
+double backwardRec(double x, double h, int order);
 
-float centralRec(float x, float h, int order);
+double centralRec(double x, double h, int order);
 
 #endif

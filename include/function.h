@@ -3,6 +3,6 @@
 
 #include <cmath>
 
-float F(float x);
+double F(double x);
 
 #endif
