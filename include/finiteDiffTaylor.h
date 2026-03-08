@@ -1,5 +1,5 @@
-#ifndef DIFFTAYLOR_H
-#define DIFFTAYLOR_H
+#ifndef FINITEDIFFTAYLOR_H
+#define FINITEDIFFTAYLOR_H
 
 #include <cmath>
 

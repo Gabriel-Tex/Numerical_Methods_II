@@ -1,6 +1,6 @@
 #include "../include/function.h"
-#include "../include/diffTaylor.h"
-#include "../include/diffLimits.h"
+#include "../include/finiteDiffTaylor.h"
+#include "../include/finiteDiff.h"
 
 // Fórmula de Taylor:
 // F(x + h) = F(x) + F'(x)*h + 1/2! * F''(x)*h² + 1/3! * F'''(x)*h³ + ...

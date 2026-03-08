@@ -1,0 +1,396 @@
+/* ============ VARIABLES ============ */
+:root {
+    --color-primary: #37375B;
+    --color-secondary: #395B8E;
+    --color-tertiary: #477AAF;
+    --color-quaternary: #77AECD;
+    --accordion-color: #BFBFBF;
+    --IO-color: #E2E2E2;
+    --background-primary: white;
+    --background-secondary: #cfcfcfc5;
+
+    --background-header-and-footer-gradient: linear-gradient(to bottom, #272744, #37375B);
+    --background-primary-gradient: linear-gradient(to bottom, #e6e6e6, #ffffff);
+    --background-secondary-gradient: linear-gradient(to bottom, #c2c2c2, #cccccc);
+    --banner-gradient: linear-gradient(to top, #395B8E, #477AAF);
+    --accordion-gradient: linear-gradient(45deg, #BFBFBF, #d4d4d4);
+    --IO-gradient: linear-gradient(45deg, #dadada, #f1f1f1);
+}
+
+/* ============ ALL ============ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inria Sans", sans-serif;
+    font-size: 100%;
+}
+
+/* ============ GENERAL ============ */
+h1 {
+    font-family: "Italiana", sans-serif;
+    font-size: 3rem;
+    /* 48px */
+    text-shadow: 0px 4px 5px rgba(0, 0, 0, 0.9);
+    color: white;
+}
+
+h2 {
+    font-size: 3rem;
+    /* 32px */
+    font-weight: normal;
+}
+
+h3 {
+    font-size: 2.5rem;
+    font-weight: normal;
+}
+
+/* ============ HEADER ============ */
+
+header {
+    background-image: var(--background-header-and-footer-gradient);
+    height: 64px;
+    font-size: 1.25rem;
+    /* 20px */
+    padding: 12px 20px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    gap: 42px;
+}
+
+/* nav */
+
+nav {
+    display: flex;
+    gap: 42px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    transition: .5s;
+}
+
+nav a:hover {
+    color: var(--color-tertiary);
+}
+
+nav a:focus {
+    color: var(--color-tertiary);
+}
+
+/* icon */
+
+header figure {
+    margin-right: auto;
+}
+
+img#github-icon {
+    transition: transform .5s;
+    width: 40px;
+}
+
+img#github-icon:hover {
+    transform: scale(1.1);
+}
+
+/* toggle switch */
+
+input[type="checkbox"] {
+    appearance: none;
+    background-color: var(--color-tertiary);
+    width: 60px;
+    height: 28px;
+    border-radius: 32px;
+    position: relative;
+    cursor: pointer;
+    transition: .4s;
+}
+
+input[type="checkbox"]:before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--color-quaternary);
+    position: absolute;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.7);
+    top: 4px;
+    left: 4px;
+    transition: .3s;
+}
+
+input:checked[type="checkbox"]:before {
+    left: 36px;
+}
+
+/* ============ BANNER ============ */
+
+section#banner {
+    background-color: var(--color-secondary);
+    background-image: url(../assets/Banner.png), var(--banner-gradient);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+    height: 512px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-style: solid;
+    border-width: 4px;
+    border-color: black;
+}
+
+/* ============ FOOTER ============ */
+footer {
+    background-image: var(--background-header-and-footer-gradient);
+    height: 200px;
+    font-size: 1.25rem;
+    /* 20px */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer.no-home {
+    border-top-style: solid;
+    border-color: black;
+    border-width: 4px;
+}
+
+/* ################################## INDEX.HTML ################################## */
+
+/* ============ MAIN ============ */
+
+/* ------------ GENERAL ------------ */
+
+/* units */
+section.units {
+    padding: 36px 36px;
+    border-bottom-style: solid;
+    border-color: black;
+    border-width: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+section.units h2 {
+    margin: 32px auto;
+}
+
+/* methods */
+section.methods {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+section.methods h3 {
+    margin: 28px auto;
+}
+
+/* IO container */
+div.IO-container {
+    width: 60%;
+    min-width: 720px;
+    max-width: 900px;
+}
+
+.accordion {
+    background-image: var(--accordion-gradient);
+    border-radius: 8px;
+    border-radius: 8px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 16px;
+}
+
+.arrow {
+    transition: transform .2s linear;
+}
+
+.accordion:has(.active) .arrow {
+    transform: rotate(90deg);
+}
+
+button.accordion-header {
+    width: 100%;
+    height: 48px;
+    cursor: pointer;
+    border-style: none;
+    text-align: left;
+    padding: 0px 16px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.1rem;
+}
+
+button.accordion-header span {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+div.accordion-body {
+    height: 0px;
+    opacity: 0;
+    overflow: hidden;
+    transition: .3s;
+}
+
+div.accordion-body.active {
+    height: auto;
+    opacity: 1;
+}
+
+div.accordion-body p {
+    font-size: 1.2rem;
+    width: 92%;
+    margin: 0px auto;
+    margin-bottom: 16px;
+}
+
+.IO-container input {
+    width: 100%;
+    height: 72px;
+    background-image: var(--IO-gradient);
+    border-radius: 8px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    text-align: left;
+    font-size: 1.1rem;
+    padding: 0px 16px;
+    margin-bottom: 16px;
+    outline: none;
+}
+
+div.output-container {
+    width: 100%;
+    height: 72px;
+    background-image: var(--IO-gradient);
+    border-radius: 8px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    text-align: left;
+    padding: 0px 16px;
+    margin-bottom: 48px;
+}
+
+/* ------------ UNIT ONE ------------ */
+section#unit-one {
+    background-image: var(--background-primary-gradient);
+}
+
+/* ------------ UNIT TWO ------------ */
+section#unit-two {
+    background-image: var(--background-secondary-gradient);
+
+}
+
+/* ################################## ABOUT.HTML ################################## */
+
+/* ============ MAIN ============ */
+
+.div-sections {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px auto 100px auto;
+    width: 70%;
+    max-width: 1200px;
+    min-width: 800px;
+    font-size: 1.5rem;
+    line-height: 140%;
+
+}
+
+.div-sections h2 {
+    margin-bottom: 40px;
+    font-size: 2.75rem;
+}
+
+#content {
+    background-image: var(--background-secondary-gradient);
+    border-style: solid none solid none;
+    border-width: 4px;
+    border-color: black;
+    padding-top: 100px;
+}
+
+#context,
+#tech {
+    background-image: var(--background-primary-gradient);
+    padding-top: 100px;
+}
+
+#fig-tech {
+    display: flex;
+    gap: 48px;
+}
+
+
+/* ################################## DEVS.HTML ################################## */
+
+/* ============ MAIN ============ */
+
+#devs-container{
+    background-image: var(--background-primary-gradient);
+    padding-top: 100px;
+}
+
+.dev {
+    display: flex;
+    align-items: center;
+    width: 75%;
+    margin: 0px auto 100px auto;
+    gap: 48px;
+    font-size: 1.5rem;
+    min-width: 1024px;
+    max-width: 1500px;
+}
+
+#dev2 {
+    text-align: right;
+    line-height: 140%;
+}
+
+.perfil-images {
+    width: 256px;
+    height: 256px;
+}
+
+.social-media {
+    margin-top: 4px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    font-size: 48px;
+}
+
+.social-media a {
+    color: black;
+    transition: .5s;
+}
+
+.social-media a:hover {
+    color: black;
+    transform: scale(1.2);
+}
+
+
+
+/* ################################## MEDIA QUERIES ################################## */

@@ -1,7 +1,7 @@
 #include <iostream>
 #include "include/function.h"
-#include "include/diffLimits.h"
-#include "include/diffTaylor.h"
+#include "include/finiteDiff.h"
+#include "include/finiteDiffTaylor.h"
 
 using namespace std;
 

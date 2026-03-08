@@ -1,9 +1,9 @@
-#ifndef DIFFLIMITS_H
-#define DIFFLIMITS_H
+#ifndef FINITEDIFF_H
+#define FINITEDIFF_H
 
 #include <cmath>
 
-// ================ MÉTODOS DE DERIVAÇÃO INDIVIDUAIS (DIFERENÇAS FINITAS) ================
+// ================ MÉTODOS DE DERIVAÇÃO INDIVIDUAIS ================
 // -------- FORWARD, BACKWARD E CENTRAL --------
 
 // FORWARD
@@ -33,7 +33,7 @@ double thirdCentralDerivation(double x, double h);
 
 double fourthCentralDerivation(double x, double h);
 
-// ================ MÉTODOS DE DERIVAÇÃO RECURSIVOS (DIFERENÇAS FINITAS) ================
+// ================ MÉTODOS DE DERIVAÇÃO RECURSIVOS ================
 
 // -------- FORWARD, BACKWARD E CENTRAL --------
 double forwardRec(double x, double h, int order);

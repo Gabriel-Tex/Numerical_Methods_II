@@ -1,5 +1,5 @@
 #include "../include/function.h"
-#include "../include/diffLimits.h"
+#include "../include/finiteDiff.h"
 
 // ================ MÉTODOS DE DERIVAÇÃO INDIVIDUAIS ================
 // -------- FORWARD, BACKWARD E CENTRAL --------
