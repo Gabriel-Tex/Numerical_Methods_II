@@ -450,8 +450,7 @@ section#unit-two {
     /* ============ INDEX.HTML -> MAIN ============ */
 
     div.IO-container {
-        min-width: 400px;
-
+        min-width: 380px;
     }
 
     /* ============ INDEX.HTML -> ABOUT ============ */
@@ -572,7 +571,7 @@ section#unit-two {
     /* ============ INDEX.HTML -> MAIN ============ */
 
     div.IO-container {
-        min-width: 400px;
+        min-width: 340px;
 
     }
 
