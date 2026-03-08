@@ -27,23 +27,31 @@
 }
 
 /* ============ GENERAL ============ */
+
+body {
+    overflow-x: hidden;
+}
+
 h1 {
     font-family: "Italiana", sans-serif;
     font-size: 3rem;
     /* 48px */
     text-shadow: 0px 4px 5px rgba(0, 0, 0, 0.9);
     color: white;
+    text-align: center;
 }
 
 h2 {
     font-size: 3rem;
     /* 32px */
     font-weight: normal;
+    text-align: center;
 }
 
 h3 {
     font-size: 2.5rem;
     font-weight: normal;
+    text-align: center;
 }
 
 /* ============ HEADER ============ */
@@ -131,10 +139,9 @@ input:checked[type="checkbox"]:before {
 section#banner {
     background-color: var(--color-secondary);
     background-image: url(../assets/Banner.png), var(--banner-gradient);
-    background-repeat: no-repeat;
     background-size: 100%;
     background-attachment: fixed;
-    height: 512px;
+    min-height: 512px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -196,9 +203,8 @@ section.methods h3 {
 
 /* IO container */
 div.IO-container {
-    width: 60%;
-    min-width: 720px;
-    max-width: 900px;
+    width: min(90%, 800px);
+    margin: auto;
 }
 
 .accordion {
@@ -310,9 +316,7 @@ section#unit-two {
     flex-direction: column;
     align-items: center;
     margin: 0px auto 100px auto;
-    width: 70%;
-    max-width: 1200px;
-    min-width: 800px;
+    width: min(80%, 1200px);
     font-size: 1.5rem;
     line-height: 140%;
 
@@ -339,6 +343,8 @@ section#unit-two {
 
 #fig-tech {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 48px;
 }
 
@@ -355,13 +361,12 @@ section#unit-two {
 .dev {
     display: flex;
     align-items: center;
-    width: 75%;
+    width: min(80%, 1500px);
     margin: 0px auto 100px auto;
     gap: 48px;
     font-size: 1.5rem;
-    min-width: 1024px;
-    max-width: 1500px;
     line-height: 140%;
+
 }
 
 #dev2 {
@@ -396,7 +401,7 @@ section#unit-two {
 
 /* ################################## MEDIA QUERIES ################################## */
 
-@media (max-width: 480px) and (min-width: 380px) {
+@media (max-width: 768px) {
 
     /* ============ GENERAL ============ */
     h1 {
@@ -436,9 +441,7 @@ section#unit-two {
 
     /* ============ BANNER ============ */
     section#banner {
-        height: 448px;
-        background-image: none;
-        background-image: var(--banner-gradient);
+        min-height: 448px;
     }
 
     /* ============ FOOTER ============ */
@@ -449,16 +452,19 @@ section#unit-two {
 
     /* ============ INDEX.HTML -> MAIN ============ */
 
+    section.units {
+        padding: 36px 24px
+    }
+
     div.IO-container {
-        min-width: 380px;
+        min-width: 100%;
     }
 
     /* ============ INDEX.HTML -> ABOUT ============ */
 
 
     .div-sections {
-        max-width: 480px;
-        min-width: 350px;
+        width: min(80%, 600px);
         font-size: 1.1rem;
         line-height: 130%;
     }
@@ -474,7 +480,6 @@ section#unit-two {
 
     #fig-tech {
         gap: 20px;
-        flex-wrap: wrap;
     }
 
     #fig-tech img {
@@ -488,132 +493,7 @@ section#unit-two {
         margin: 0px auto 100px auto;
         gap: 24px;
         font-size: 1.1rem;
-        min-width: 350px;
-        max-width: 400px;
-    }
-
-    div#dev1 {
-        text-align: center;
-    }
-
-    div#dev2 {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .perfil-images {
-        width: 150px;
-        height: 150px;
-    }
-
-    .social-media {
-        gap: 20px;
-        font-size: 32px;
-    }
-
-
-
-    /* end media */
-}
-
-@media (max-width: 379px) {
-
-    /* ============ GENERAL ============ */
-    h1 {
-        font-size: 1.75rem;
-        text-align: center;
-    }
-
-    h2 {
-        font-size: 1.75rem;
-        text-align: center;
-    }
-
-    h3 {
-        font-size: 1.25rem;
-        text-align: center;
-    }
-
-    /* ============ HEADER ============ */
-    header {
-        font-size: 1rem;
-        justify-content: right;
-        gap: 16px;
-        padding: 12px 24px;
-    }
-
-    img#github-icon {
-        width: 32px;
-    }
-
-    nav {
-        gap: 16px;
-    }
-
-    input[type="checkbox"] {
-        display: none;
-    }
-
-    /* ============ BANNER ============ */
-    section#banner {
-        height: 448px;
-        background-image: none;
-        background-image: var(--banner-gradient);
-    }
-
-    /* ============ FOOTER ============ */
-    footer {
-        font-size: 0.7rem;
-        text-align: center;
-        height: 150px;
-    }
-
-    /* ============ INDEX.HTML -> MAIN ============ */
-
-    div.IO-container {
-        min-width: 340px;
-
-    }
-
-    /* ============ INDEX.HTML -> ABOUT ============ */
-
-
-    .div-sections {
-        width: 70%;
-        max-width: 380px;
-        min-width: 300px;
-        font-size: 1rem;
-        line-height: 130%;
-    }
-
-    .div-sections h2 {
-        margin-bottom: 40px;
-        font-size: 2.25rem;
-    }
-
-    .div-sections p {
-        text-align: center;
-    }
-
-    #fig-tech {
-        gap: 20px;
-        flex-wrap: wrap;
-    }
-
-    #fig-tech img {
-        width: 100px;
-    }
-
-    /* ============ INDEX.HTML -> DEVS ============ */
-
-    
-    .dev {
-        flex-direction: column;
-        margin: 0px auto 100px auto;
-        gap: 24px;
-        font-size: 1.1rem;
-        min-width: 350px;
-        max-width: 400px;
+        width: min(85%, 500px);
     }
 
     div#dev1 {
