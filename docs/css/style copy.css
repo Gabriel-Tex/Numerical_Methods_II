@@ -366,7 +366,6 @@ section#unit-two {
 
 #dev2 {
     text-align: right;
-    flex-direction: row-reverse;
 }
 
 .perfil-images {
@@ -396,7 +395,7 @@ section#unit-two {
 
 /* ################################## MEDIA QUERIES ################################## */
 
-@media (max-width: 480px) and (min-width: 380px) {
+@media (max-width: 480px) {
 
     /* ============ GENERAL ============ */
     h1 {
@@ -458,8 +457,9 @@ section#unit-two {
 
 
     .div-sections {
+        width: 70%;
         max-width: 480px;
-        min-width: 350px;
+        min-width: 380px;
         font-size: 1.1rem;
         line-height: 130%;
     }
@@ -489,140 +489,15 @@ section#unit-two {
         margin: 0px auto 100px auto;
         gap: 24px;
         font-size: 1.1rem;
-        min-width: 350px;
-        max-width: 400px;
+        min-width: 380px;
+        max-width: 480px;
     }
 
-    div#dev1 {
+    #dev2 {
         text-align: center;
     }
 
-    div#dev2 {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .perfil-images {
-        width: 150px;
-        height: 150px;
-    }
-
-    .social-media {
-        gap: 20px;
-        font-size: 32px;
-    }
-
-
-
-    /* end media */
-}
-
-@media (max-width: 379px) {
-
-    /* ============ GENERAL ============ */
-    h1 {
-        font-size: 1.75rem;
-        text-align: center;
-    }
-
-    h2 {
-        font-size: 1.75rem;
-        text-align: center;
-    }
-
-    h3 {
-        font-size: 1.25rem;
-        text-align: center;
-    }
-
-    /* ============ HEADER ============ */
-    header {
-        font-size: 1rem;
-        justify-content: right;
-        gap: 16px;
-        padding: 12px 24px;
-    }
-
-    img#github-icon {
-        width: 32px;
-    }
-
-    nav {
-        gap: 16px;
-    }
-
-    input[type="checkbox"] {
-        display: none;
-    }
-
-    /* ============ BANNER ============ */
-    section#banner {
-        height: 448px;
-        background-image: none;
-        background-image: var(--banner-gradient);
-    }
-
-    /* ============ FOOTER ============ */
-    footer {
-        font-size: 0.7rem;
-        text-align: center;
-        height: 150px;
-    }
-
-    /* ============ INDEX.HTML -> MAIN ============ */
-
-    div.IO-container {
-        min-width: 400px;
-
-    }
-
-    /* ============ INDEX.HTML -> ABOUT ============ */
-
-
-    .div-sections {
-        width: 70%;
-        max-width: 380px;
-        min-width: 300px;
-        font-size: 1rem;
-        line-height: 130%;
-    }
-
-    .div-sections h2 {
-        margin-bottom: 40px;
-        font-size: 2.25rem;
-    }
-
-    .div-sections p {
-        text-align: center;
-    }
-
-    #fig-tech {
-        gap: 20px;
-        flex-wrap: wrap;
-    }
-
-    #fig-tech img {
-        width: 100px;
-    }
-
-    /* ============ INDEX.HTML -> DEVS ============ */
-
-    
-    .dev {
-        flex-direction: column;
-        margin: 0px auto 100px auto;
-        gap: 24px;
-        font-size: 1.1rem;
-        min-width: 350px;
-        max-width: 400px;
-    }
-
-    div#dev1 {
-        text-align: center;
-    }
-
-    div#dev2 {
-        flex-direction: column;
+    #dev1 {
         text-align: center;
     }
 
