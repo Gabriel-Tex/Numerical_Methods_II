@@ -1,7 +1,8 @@
 #include <iostream>
 #include "include/function.h"
-#include "include/finiteDiff.h"
-#include "include/finiteDiffTaylor.h"
+#include "include/numericalDiff/finiteDiff.h"
+#include "include/numericalDiff/finiteDiffTaylor.h"
+#include "include/numericalDiff/finiteDiffNewton.h"
 
 using namespace std;
 
@@ -67,6 +68,7 @@ int main()
     cout << "secondForwardRec: " << forwardRec(x, h, 2) << endl;
     cout << "secondCentralRec: " << backwardRec(x, h, 2) << endl;
     cout << "secondBackwardRec: " << centralRec(x, h, 2) << endl;
+    cout << "secondForwardNewton: " << secondNewtonDerivation_fourthOrderAndFoward(x, h) << endl;
 
     cout << "=====================================" << endl;
     cout << "thirdForward: " << thirdForwardDerivation(x, h) << endl;
