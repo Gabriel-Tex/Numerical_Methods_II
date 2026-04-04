@@ -4,6 +4,15 @@
 #include "include/numericalDiff/finiteDiffTaylor.h"
 #include "include/numericalDiff/finiteDiffNewton.h"
 
+void CLS()
+{
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+
 using namespace std;
 
 /*
@@ -22,6 +31,7 @@ terceiras e quartas (erro propagado e muitas subtrações)
 // main somente para testes
 int main()
 {
+    CLS();
     // x, h, filosofia, Fx, ordem da derivada
     float x, h, result;
     int order, option;
@@ -53,6 +63,9 @@ int main()
     }
     */
     
+    CLS();
+    cout << "x: " << x << endl;
+    cout << "h: " << h << endl;
     cout << "=====================================" << endl;
     cout << "firstForward: " << firstForwardDerivation(x, h) << endl;
     cout << "firstCentral: " << firstCentralDerivation(x, h) << endl;
@@ -68,7 +81,7 @@ int main()
     cout << "secondForwardRec: " << forwardRec(x, h, 2) << endl;
     cout << "secondCentralRec: " << backwardRec(x, h, 2) << endl;
     cout << "secondBackwardRec: " << centralRec(x, h, 2) << endl;
-    cout << "secondForwardNewton: " << secondNewtonDerivation_fourthOrderAndFoward(x, h) << endl;
+    cout << "secondNewton: " << secondNewtonDerivation_fourthOrder(x, h) << endl;
 
     cout << "=====================================" << endl;
     cout << "thirdForward: " << thirdForwardDerivation(x, h) << endl;

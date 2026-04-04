@@ -19,7 +19,9 @@ double thirdForwardDerivation(double x, double h){
 
 double fourthForwardDerivation(double x, double h){
     // F''''(x) = (F'''(x+h) - F'''(x)) / h
-    return (thirdForwardDerivation(x+h, h) - thirdForwardDerivation(x, h)) / h;
+    return ( ( (1 / pow(h,3)) * (F(x + 4*h) - 3*F(x+3*h) + 3*F(x + 2*h) - F(x+h)) ) 
+            - ( (1 / pow(h, 3)) * ( F(x+3*h) - 3*F(x+2*h) + 3*F(x+h) - F(x) ) )
+            ) / h;
 }
 
 // BACKWARD

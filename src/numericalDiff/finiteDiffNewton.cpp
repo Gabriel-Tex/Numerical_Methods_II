@@ -1,7 +1,7 @@
 #include "../../include/function.h"
 
-// corrigir: 
-double secondNewtonDerivation_fourthOrderAndFoward(double x, double h){
-    return (-(5/6)*F(x+5*h) + (61/12)*F(x+4*h) - 13*F(x+3*h) + (107/6)*F(x+2*h) - 
-    (77/6)*F(x+h) + (45/12)*F(x)) / (h*h);
+double secondNewtonDerivation_fourthOrder(double x, double h){
+    return ( 137*F(x + 6*h) -672*F(x + 5*h) +1635*F(x + 4*h) -2740*F(x + 3*h)
++3255*F(x + 2*h) - 2292*F(x + h) + 677*F(x) ) / (180 * h*h);
 }
+

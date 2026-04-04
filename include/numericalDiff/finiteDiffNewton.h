@@ -1,6 +1,6 @@
 #ifndef FINITEDIFFNEWTON_H
 #define FINITEDIFFNEWTON_H  
 
-double secondNewtonDerivation_fourthOrderAndFoward(double x, double h);
+double secondNewtonDerivation_fourthOrder(double x, double h);
 
 #endif
