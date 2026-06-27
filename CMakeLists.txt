@@ -12,6 +12,12 @@ add_executable(methods
     src/numericalInt/gaussSpecial.cpp
     src/numericalInt/singularIntegral.cpp
     src/numericalInt/multiDimIntegral.cpp
+    src/eigenValues/matrizUtils.cpp
+    src/eigenValues/potencia.cpp
+    src/eigenValues/householder.cpp
+    src/eigenValues/jacobi.cpp
+    src/eigenValues/metodoQR.cpp
+    src/eigenValues/menuAutovalores.cpp
 )
 
 target_include_directories(methods PRIVATE include)

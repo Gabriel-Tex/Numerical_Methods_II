@@ -12,6 +12,8 @@
 #include "include/numericalInt/singularIntegral.h"
 #include "include/numericalInt/multiDimIntegral.h"
 
+#include "include/eigenValues/menuAutovalores.h"
+
 static void limpaTela()
 {
 #ifdef _WIN32
@@ -296,10 +298,15 @@ int main()
         std::cout << "║                  dupla - Solução 2)              ║\n";
         std::cout << "║  5 - Aula   15   Área de Superfície 3D           ║\n";
         std::cout << "║  6 - Aula   16   Volume                          ║\n";
+        std::cout << "║──────────────────────────────────────────────────║\n";
+        std::cout << "║  7 - Aulas 18/19 Metodos da Potencia             ║\n";
+        std::cout << "║  8 - Aula   20   Householder (Tarefa 13)         ║\n";
+        std::cout << "║  9 - Aula   21   Jacobi (Tarefa 14)              ║\n";
+        std::cout << "║ 10 - Aula   22   QR (Tarefa 15)                  ║\n";
         std::cout << "║  0 - Sair                                        ║\n";
         std::cout << "╚══════════════════════════════════════════════════╝\n";
 
-        int op = lerInt("Opção: ", 0, 6);
+        int op = lerInt("Opção: ", 0, 10);
         switch (op)
         {
         case 1:
@@ -319,6 +326,18 @@ int main()
             break;
         case 6:
             menuVolume();
+            break;
+        case 7:
+            menuPotencia();
+            break;
+        case 8:
+            menuHouseholder();
+            break;
+        case 9:
+            menuJacobi();
+            break;
+        case 10:
+            menuQR();
             break;
         case 0:
             std::cout << "Encerrando.\n";
