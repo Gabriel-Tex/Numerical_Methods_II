@@ -20,6 +20,12 @@ add_executable(methods
     src/eigenValues/jacobi.cpp
     src/eigenValues/metodoQR.cpp
     src/eigenValues/menuAutovalores.cpp
+    src/pvi/pviUtils.cpp
+    src/pvi/eulerExplicito.cpp
+    src/pvi/eulerImplicito.cpp
+    src/pvi/rungeKutta.cpp
+    src/pvi/preditorCorretor.cpp
+    src/pvi/menuPVI.cpp
 )
 
 target_include_directories(methods PRIVATE include)

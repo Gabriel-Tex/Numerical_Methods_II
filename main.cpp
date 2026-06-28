@@ -5,6 +5,7 @@
 #include "include/numericalDiff/menuDerivacao.h"
 #include "include/numericalInt/menuIntegracao.h"
 #include "include/eigenValues/menuAutovalores.h"
+#include "include/pvi/menuPVI.h"
 
 static void limpaTela()
 {
@@ -44,17 +45,21 @@ int main()
         std::cout << "  7 - Volume                          \n";
         std::cout << "──────────────────────────────────────\n";
         std::cout << "  8 - Metodos da Potencia             \n";
-        std::cout << "  9 - Householder (Tarefa 13)         \n";
-        std::cout << "  10 - Jacobi (Tarefa 14)             \n";
-        std::cout << "  11 - QR (Tarefa 15)                 \n";
+        std::cout << "  9 - Householder                     \n";
+        std::cout << "  10 - Jacobi                         \n";
+        std::cout << "  11 - QR                             \n";
+        std::cout << "──────────────────────────────────────\n";
+        std::cout << "  12 - PVI: Euler / Runge-Kutta /     \n";
+        std::cout << "       Preditor-Corretor              \n";
+        std::cout << "──────────────────────────────────────\n";
         std::cout << "  0 - Sair                            \n";
         std::cout << "══════════════════════════════════════\n";
 
-        int op = lerInt("Opcao: ", 0, 10);
+        int op = lerInt("Opcao: ", 0, 12);
         switch (op)
         {
-        case 1:  
-            menuDerivacao();   
+        case 1:
+            menuDerivacao();
             break;
         case 2:
             menuNewtonCotes();
@@ -85,6 +90,9 @@ int main()
             break;
         case 11:
             menuQR();
+            break;
+        case 12:
+            menuPVI();
             break;
         case 0:
             std::cout << "Encerrando.\n";
