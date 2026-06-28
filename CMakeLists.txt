@@ -7,10 +7,12 @@ add_executable(methods
     src/numericalDiff/finiteDiff.cpp
     src/numericalDiff/finiteDiffTaylor.cpp
     src/numericalDiff/finiteDiffNewton.cpp
+    src/numericalDiff/menuDerivacao.cpp
     src/numericalInt/newtonCotes.cpp
     src/numericalInt/gaussLegendre.cpp
     src/numericalInt/gaussSpecial.cpp
     src/numericalInt/singularIntegral.cpp
+    src/numericalInt/menuIntegracao.cpp
     src/numericalInt/multiDimIntegral.cpp
     src/eigenValues/matrizUtils.cpp
     src/eigenValues/potencia.cpp
