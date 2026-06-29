@@ -7,28 +7,28 @@ add_executable(methods
     src/numericalDiff/finiteDiff.cpp
     src/numericalDiff/finiteDiffTaylor.cpp
     src/numericalDiff/finiteDiffNewton.cpp
-    src/numericalDiff/menuDerivacao.cpp
+    src/numericalDiff/menuNumericalDiff.cpp
     src/numericalInt/newtonCotes.cpp
     src/numericalInt/gaussLegendre.cpp
     src/numericalInt/gaussSpecial.cpp
     src/numericalInt/singularIntegral.cpp
-    src/numericalInt/menuIntegracao.cpp
     src/numericalInt/multiDimIntegral.cpp
-    src/eigenValues/matrizUtils.cpp
-    src/eigenValues/potencia.cpp
-    src/eigenValues/householder.cpp
-    src/eigenValues/jacobi.cpp
-    src/eigenValues/metodoQR.cpp
-    src/eigenValues/menuAutovalores.cpp
+    src/numericalInt/menuNumericalInt.cpp
+    src/eigenvalues/matrixUtils.cpp
+    src/eigenvalues/powerMethod.cpp
+    src/eigenvalues/householder.cpp
+    src/eigenvalues/jacobiMethod.cpp
+    src/eigenvalues/qrMethod.cpp
+    src/eigenvalues/menuEigenvalues.cpp
     src/pvi/pviUtils.cpp
-    src/pvi/eulerExplicito.cpp
-    src/pvi/eulerImplicito.cpp
+    src/pvi/explicitEuler.cpp
+    src/pvi/implicitEuler.cpp
     src/pvi/rungeKutta.cpp
-    src/pvi/preditorCorretor.cpp
+    src/pvi/predictorCorrector.cpp
     src/pvi/menuPVI.cpp
     src/pvc/pvcUtils.cpp
-    src/pvc/diferencasFinitas.cpp
-    src/pvc/elementosFinitos.cpp
+    src/pvc/finiteDiff.cpp
+    src/pvc/finiteElements.cpp
     src/pvc/menuPVC.cpp
 )
 

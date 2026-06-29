@@ -1,4 +1,4 @@
-#include "../../include/numericalInt/menuIntegracao.h"
+#include "../../include/numericalInt/menuNumericalInt.h"
 #include "../../include/function.h"
 #include "../../include/numericalInt/newtonCotes.h"
 #include "../../include/numericalInt/gaussLegendre.h"
@@ -12,25 +12,16 @@
 #include <string>
 #include <limits>
 
-// ---- Utilitários locais ----
+// ---- utilitários locais ----
 
-static void limpaTela()
-{
-#ifdef _WIN32
-    system("cls");
-#else
-    system("clear");
-#endif
-}
-
-static void pausar()
+static void pause()
 {
     std::cout << "\n[Enter para continuar...]";
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::cin.get();
 }
 
-static int lerInt(const std::string &prompt, int min, int max)
+static int readInt(const std::string &prompt, int min, int max)
 {
     int v;
     while (true)
@@ -44,7 +35,7 @@ static int lerInt(const std::string &prompt, int min, int max)
     }
 }
 
-static double lerDouble(const std::string &prompt)
+static double readDouble(const std::string &prompt)
 {
     double v;
     while (true)
@@ -58,22 +49,21 @@ static double lerDouble(const std::string &prompt)
     }
 }
 
-// ================================ Newton-Cotes com particionamento ================================
-void menuNewtonCotes()
+// ---- Newton-Cotes com particionamento ----
+static void menuNewtonCotes()
 {
-    limpaTela();
-    std::cout << "=== AULAS 7 e 8 - Newton-Cotes ===\n";
+    std::cout << "\n=== Aulas 7 e 8 - Newton-Cotes ===\n";
     std::cout << "Funcao: f(x) = (sin(2x) + 4x^2 + 3x)^2\n";
     std::cout << "Valor exato: I = 17.8764703\n\n";
 
-    double a = lerDouble("Limite inferior a: ");
-    double b = lerDouble("Limite superior b: ");
+    double a = readDouble("Limite inferior a: ");
+    double b = readDouble("Limite superior b: ");
 
     std::cout << "\nAbordagem:\n  1 - Fechada\n  2 - Aberta\n";
-    bool fechada = (lerInt("Escolha: ", 1, 2) == 1);
+    bool fechada = (readInt("Escolha: ", 1, 2) == 1);
 
-    int grau = lerInt("Grau do polinomio de substituicao (1-4): ", 1, 4);
-    double tol = lerDouble("Tolerancia (ex: 1e-6): ");
+    int grau = readInt("Grau do polinomio de substituicao (1-4): ", 1, 4);
+    double tol = readDouble("Tolerancia (ex: 1e-6): ");
 
     int iters = 0;
     double result = newtonCotesParticionado(F_NC, a, b, grau, fechada, tol, iters);
@@ -81,23 +71,20 @@ void menuNewtonCotes()
     std::cout << std::fixed << std::setprecision(8);
     std::cout << "\nResultado: " << result << "\n";
     std::cout << "Particoes usadas (N): " << iters << "\n";
-    pausar();
+    pause();
 }
 
-// ================================ Gauss-Legendre com particionamento ================================
-
-void menuGaussLegendre()
+// ---- Gauss-Legendre com particionamento ----
+static void menuGaussLegendre()
 {
-    limpaTela();
-    std::cout << "=== AULA 11 - Gauss-Legendre ===\n";
+    std::cout << "\n=== Aula 11 - Gauss-Legendre ===\n";
     std::cout << "Funcao: f(x) = (sin(2x) + 4x^2 + 3x)^2\n";
     std::cout << "Valor exato: I = 17.8764703\n\n";
 
-    double a = lerDouble("Limite inferior a: ");
-    double b = lerDouble("Limite superior b: ");
-
-    int n = lerInt("Numero de pontos n (2, 3 ou 4): ", 2, 4);
-    double tol = lerDouble("Tolerancia (ex: 1e-6): ");
+    double a = readDouble("Limite inferior a: ");
+    double b = readDouble("Limite superior b: ");
+    int n = readInt("Numero de pontos n (2, 3 ou 4): ", 2, 4);
+    double tol = readDouble("Tolerancia (ex: 1e-6): ");
 
     int iters = 0;
     double result = gaussLegendreParticionado(F_NC, a, b, n, tol, iters);
@@ -105,70 +92,66 @@ void menuGaussLegendre()
     std::cout << std::fixed << std::setprecision(8);
     std::cout << "\nResultado: " << result << "\n";
     std::cout << "Particoes usadas (N): " << iters << "\n";
-    pausar();
+    pause();
 }
 
-// ================================ Quadraturas Especiais de Gauss ================================
-void menuGaussEspecial()
+// ---- Quadraturas Especiais de Gauss ----
+static void menuGaussSpecial()
 {
-    limpaTela();
-    std::cout << "=== AULA 12 - Quadraturas Especiais de Gauss ===\n\n";
+    std::cout << "\n=== Aula 12 - Quadraturas Especiais de Gauss ===\n\n";
     std::cout << "Quadratura:\n";
     std::cout << "  1 - Gauss-Hermite   (integral de -inf a +inf com peso e^{-s^2})\n";
     std::cout << "  2 - Gauss-Laguerre  (integral de 0 a +inf com peso e^{-s})\n";
     std::cout << "  3 - Gauss-Chebyshev (integral de -1 a +1 com peso 1/sqrt(1-s^2))\n";
-    int quad = lerInt("Escolha: ", 1, 3);
-
-    int n = lerInt("Numero de pontos n (2, 3 ou 4): ", 2, 4);
+    int quad = readInt("Escolha: ", 1, 3);
+    int n = readInt("Numero de pontos n (2, 3 ou 4): ", 2, 4);
 
     std::cout << "\nUsando F(x) = x^3 (funcao padrao do projeto)\n";
     Func1D f = [](double s)
     { return F(s); };
 
     double result = 0.0;
-    std::string nome;
+    std::string name;
     switch (quad)
     {
     case 1:
         result = gaussHermite(f, n);
-        nome = "Gauss-Hermite";
+        name = "Gauss-Hermite";
         break;
     case 2:
         result = gaussLaguerre(f, n);
-        nome = "Gauss-Laguerre";
+        name = "Gauss-Laguerre";
         break;
     case 3:
         result = gaussChebyshev(f, n);
-        nome = "Gauss-Chebyshev";
+        name = "Gauss-Chebyshev";
         break;
     }
 
     std::cout << std::fixed << std::setprecision(10);
     std::cout << "\n"
-              << nome << " (n=" << n << "): " << result << "\n";
-    pausar();
+              << name << " (n=" << n << "): " << result << "\n";
+    pause();
 }
 
-// ================================ Integral Singular ================================
-void menuSingular()
+// ---- Integral Singular ----
+static void menuSingularIntegral()
 {
-    limpaTela();
-    std::cout << "=== AULA 14 - Integracao com Singularidade ===\n\n";
+    std::cout << "\n=== Aula 14 - Integracao com Singularidade ===\n\n";
     std::cout << "Funcoes disponiveis:\n";
     std::cout << "  1 - f(x) = x^{-1/3}        (integral [0,1] = 3/2 = 1.5)\n";
     std::cout << "  2 - f(x) = x^{-1/2} e^{-x} (integral [0,+inf] = sqrt(pi) ~ 1.7724539)\n";
-    int fn = lerInt("Escolha a funcao: ", 1, 2);
+    int fn = readInt("Escolha a funcao: ", 1, 2);
 
     std::cout << "\nMudanca de variavel:\n  1 - Exponencial simples\n  2 - Exponencial dupla\n";
-    std::string tipoStr = (lerInt("Escolha: ", 1, 2) == 1) ? "simples" : "dupla";
+    std::string tipo = (readInt("Escolha: ", 1, 2) == 1) ? "simples" : "dupla";
 
-    int nGL = lerInt("Pontos Gauss-Legendre (2, 3 ou 4): ", 2, 4);
-    double cMin = lerDouble("Valor inicial de c (ex: 3.0): ");
-    double tol = lerDouble("Tolerancia (ex: 1e-6): ");
+    int nGL = readInt("Pontos Gauss-Legendre (2, 3 ou 4): ", 2, 4);
+    double cMin = readDouble("Valor inicial de c (ex: 3.0): ");
+    double tol = readDouble("Tolerancia (ex: 1e-6): ");
 
     Func1D f;
     double a, b, exato;
-
     if (fn == 1)
     {
         f = [](double x)
@@ -187,29 +170,26 @@ void menuSingular()
     }
 
     double cFinal = 0.0;
-    double result = singularSolucao2(f, a, b, tipoStr, cMin, tol, nGL, cFinal);
+    double result = singularSolucao2(f, a, b, tipo, cMin, tol, nGL, cFinal);
 
     std::cout << std::fixed << std::setprecision(10);
     std::cout << "\nResultado:     " << result << "\n";
     std::cout << "c final usado: " << cFinal << "\n";
     std::cout << "Valor exato:   " << exato << "\n";
     std::cout << "Erro absoluto: " << std::fabs(result - exato) << "\n";
-    pausar();
+    pause();
 }
 
-// ================================Área de Superfície 3D ================================
-void menuAreaSuperficie()
+// ---- Area de Superficie 3D ----
+static void menuSurfaceArea()
 {
-    limpaTela();
-    std::cout << "=== AULA 15 - Area de Superficie 3D ===\n";
+    std::cout << "\n=== Aula 15 - Area de Superficie 3D ===\n";
     std::cout << "Superficie: z = f(x,y) = 0.2*(x^2 - y^2)\n\n";
-
     std::cout << "Dominio:\n";
     std::cout << "  1 - Retangular: x em [-50,50], y em [-50,50]  (ref: 153467.00)\n";
     std::cout << "  2 - Eliptico:   x^2/1600 + y^2/1600 <= 1     (a=b=40)\n";
-    int dom = lerInt("Escolha: ", 1, 2);
-
-    int n = lerInt("Pontos GL em cada direcao (2, 3 ou 4): ", 2, 4);
+    int dom = readInt("Escolha: ", 1, 2);
+    int n = readInt("Pontos GL em cada direcao (2, 3 ou 4): ", 2, 4);
 
     Func2D dfx = [](double x, double y)
     { return dF_surf_dx(x, y); };
@@ -229,22 +209,19 @@ void menuAreaSuperficie()
     }
 
     std::cout << std::fixed << std::setprecision(4) << result << "\n";
-    pausar();
+    pause();
 }
 
-// ================================ Volume abaixo de superfície ================================
-void menuVolume()
+// ---- Volume abaixo de superficie ----
+static void menuVolume()
 {
-    limpaTela();
-    std::cout << "=== AULA 16 - Volume abaixo da Superficie ===\n";
+    std::cout << "\n=== Aula 16 - Volume abaixo da Superficie ===\n";
     std::cout << "Superficie: z = f(x,y) = 0.2*(x^2 - y^2)\n\n";
-
     std::cout << "Dominio:\n";
     std::cout << "  1 - Retangular: x em [-40,40], y em [-20,20]  (ref: 256000 m^3)\n";
     std::cout << "  2 - Eliptico:   x^2/1600 + y^2/400 <= 1      (a=40, b=20)\n";
-    int dom = lerInt("Escolha: ", 1, 2);
-
-    int n = lerInt("Pontos GL em cada direcao (2, 3 ou 4): ", 2, 4);
+    int dom = readInt("Escolha: ", 1, 2);
+    int n = readInt("Pontos GL em cada direcao (2, 3 ou 4): ", 2, 4);
 
     Func2D fsurf = [](double x, double y)
     { return F_surf(x, y); };
@@ -262,5 +239,37 @@ void menuVolume()
     }
 
     std::cout << std::fixed << std::setprecision(4) << result << " m^3\n";
-    pausar();
+    pause();
+}
+
+// ---- Menu principal de integração ----
+void menuNumericalInt()
+{
+    while (true)
+    {
+        std::cout << "   Integracao Numerica                   \n";
+        std::cout << "  1 - Newton-Cotes                       \n";
+        std::cout << "  2 - Gauss-Legendre                     \n";
+        std::cout << "  3 - Quadraturas Especiais              \n";
+        std::cout << "  4 - Integral Singular                  \n";
+        std::cout << "  5 - Area de Superficie 3D              \n";
+        std::cout << "  6 - Volume                             \n";
+        std::cout << "  0 - Voltar                             \n";
+
+        int op = readInt("Opcao: ", 0, 6);
+        if (op == 0)
+            return;
+        if (op == 1)
+            menuNewtonCotes();
+        if (op == 2)
+            menuGaussLegendre();
+        if (op == 3)
+            menuGaussSpecial();
+        if (op == 4)
+            menuSingularIntegral();
+        if (op == 5)
+            menuSurfaceArea();
+        if (op == 6)
+            menuVolume();
+    }
 }

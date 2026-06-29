@@ -2,22 +2,13 @@
 #include <string>
 #include <limits>
 
-#include "include/numericalDiff/menuDerivacao.h"
-#include "include/numericalInt/menuIntegracao.h"
-#include "include/eigenValues/menuAutovalores.h"
+#include "include/numericalDiff/menuNumericalDiff.h"
+#include "include/numericalInt/menuNumericalInt.h"
+#include "include/eigenvalues/menuEigenvalues.h"
 #include "include/pvi/menuPVI.h"
 #include "include/pvc/menuPVC.h"
 
-static void limpaTela()
-{
-#ifdef _WIN32
-    system("cls");
-#else
-    system("clear");
-#endif
-}
-
-static int lerInt(const std::string &prompt, int min, int max)
+static int readInt(const std::string &prompt, int min, int max)
 {
     int v;
     while (true)
@@ -35,68 +26,29 @@ int main()
 {
     while (true)
     {
-        limpaTela();
-        std::cout << "══════════════════════════════════════\n";
-        std::cout << "  1 - Derivacao Numerica              \n";
-        std::cout << "  2 - Newton-Cotes (com particao)     \n";
-        std::cout << "  3 - Gauss-Legendre (com particao)   \n";
-        std::cout << "  4 - Quadraturas Especiais de Gauss  \n";
-        std::cout << "  5 - Integral Singular               \n";
-        std::cout << "  6 - Area de Superficie 3D           \n";
-        std::cout << "  7 - Volume                          \n";
-        std::cout << "──────────────────────────────────────\n";
-        std::cout << "  8 - Metodos da Potencia             \n";
-        std::cout << "  9 - Householder                     \n";
-        std::cout << "  10 - Jacobi                         \n";
-        std::cout << "  11 - QR                             \n";
-        std::cout << "──────────────────────────────────────\n";
-        std::cout << "  12 - PVI                            \n";
-        std::cout << "──────────────────────────────────────\n";
-        std::cout << "  13 - PVC                            \n";
-        std::cout << "──────────────────────────────────────\n";
-        std::cout << "  0 - Sair                            \n";
-        std::cout << "══════════════════════════════════════\n";
+        std::cout << "  1 - Derivacao Numerica                  \n";
+        std::cout << "  2 - Integracao Numerica                 \n";
+        std::cout << "  3 - Autovalores e Autovetores           \n";
+        std::cout << "  4 - PVI: Problemas de Valor Inicial     \n";
+        std::cout << "  5 - PVC: Problemas de Valor de Contorno \n";
+        std::cout << "  0 - Sair                                \n";
 
-        int op = lerInt("Opcao: ", 0, 13);
+        int op = readInt("Opcao: ", 0, 5);
         switch (op)
         {
         case 1:
-            menuDerivacao();
+            menuNumericalDiff();
             break;
         case 2:
-            menuNewtonCotes();
+            menuNumericalInt();
             break;
         case 3:
-            menuGaussLegendre();
+            menuEigenvalues();
             break;
         case 4:
-            menuGaussEspecial();
-            break;
-        case 5:
-            menuSingular();
-            break;
-        case 6:
-            menuAreaSuperficie();
-            break;
-        case 7:
-            menuVolume();
-            break;
-        case 8:
-            menuPotencia();
-            break;
-        case 9:
-            menuHouseholder();
-            break;
-        case 10:
-            menuJacobi();
-            break;
-        case 11:
-            menuQR();
-            break;
-        case 12:
             menuPVI();
             break;
-        case 13:
+        case 5:
             menuPVC();
             break;
         case 0:

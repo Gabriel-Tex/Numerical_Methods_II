@@ -1,38 +1,34 @@
 #include "../../include/pvi/pviUtils.h"
 #include <cmath>
-#include <stdexcept>
 
-// Soma elemento a elemento de dois estados
-Estado somaEstado(const Estado &a, const Estado &b)
+State addStates(const State &a, const State &b)
 {
     int n = (int)a.size();
-    Estado r(n);
+    State r(n);
     for (int i = 0; i < n; i++)
         r[i] = a[i] + b[i];
     return r;
 }
 
-// Multiplica todos os componentes do estado por um escalar
-Estado escalaEstado(double alpha, const Estado &a)
+State scaleState(double alpha, const State &a)
 {
     int n = (int)a.size();
-    Estado r(n);
+    State r(n);
     for (int i = 0; i < n; i++)
         r[i] = alpha * a[i];
     return r;
 }
 
-// Erro relativo pela norma infinito: max_i |novo[i] - antigo[i]| / |novo[i]|
-double erroRelativo(const Estado &novo, const Estado &antigo)
+double relativeError(const State &newer, const State &older)
 {
     double err = 0.0;
-    int n = (int)novo.size();
+    int n = (int)newer.size();
     for (int i = 0; i < n; i++)
     {
-        double den = std::fabs(novo[i]);
+        double den = std::fabs(newer[i]);
         if (den < 1e-15)
             den = 1e-15;
-        double e = std::fabs(novo[i] - antigo[i]) / den;
+        double e = std::fabs(newer[i] - older[i]) / den;
         if (e > err)
             err = e;
     }

@@ -1,4 +1,4 @@
-#include "../../include/numericalDiff/menuDerivacao.h"
+#include "../../include/numericalDiff/menuNumericalDiff.h"
 #include "../../include/function.h"
 #include "../../include/numericalDiff/finiteDiff.h"
 #include "../../include/numericalDiff/finiteDiffNewton.h"
@@ -9,25 +9,16 @@
 #include <string>
 #include <limits>
 
-// ---- Utilitários locais ----
+// ---- utilitários locais ----
 
-static void limpaTela()
-{
-#ifdef _WIN32
-    system("cls");
-#else
-    system("clear");
-#endif
-}
-
-static void pausar()
+static void pause()
 {
     std::cout << "\n[Enter para continuar...]";
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::cin.get();
 }
 
-static int lerInt(const std::string &prompt, int min, int max)
+static int readInt(const std::string &prompt, int min, int max)
 {
     int v;
     while (true)
@@ -41,7 +32,7 @@ static int lerInt(const std::string &prompt, int min, int max)
     }
 }
 
-static double lerDouble(const std::string &prompt)
+static double readDouble(const std::string &prompt)
 {
     double v;
     while (true)
@@ -55,46 +46,31 @@ static double lerDouble(const std::string &prompt)
     }
 }
 
-// Menu de Derivação Numérica
-void menuDerivacao()
+void menuNumericalDiff()
 {
-    limpaTela();
-    std::cout << "=== DERIVACAO NUMERICA ===\n";
-    std::cout << "Funcao: F(x) = x^3\n\n";
+    std::cout << "   Derivacao Numerica                     \n";
+    std::cout << "  1 - Diferencas Finitas                  \n";
+    std::cout << "  2 - Formula de Newton (2a deriv, 4a ord)\n";
+    std::cout << "  3 - Expansao de Taylor (1a derivada)    \n";
+    int metodo = readInt("Escolha: ", 1, 3);
 
-    std::cout << "Metodo:\n";
-    std::cout << "  1 - Diferencas Finitas  (forward / backward / central, ordens 1-4)\n";
-    std::cout << "  2 - Formula de Newton   (2a derivada, 4a ordem, forward)\n";
-    std::cout << "  3 - Expansao de Taylor  (1a derivada, erros O(h), O(h^2), O(h^3))\n";
-    int metodo = lerInt("Escolha: ", 1, 3);
-
-    double x = lerDouble("Ponto x: ");
-    double h = lerDouble("Passo h: ");
+    double x = readDouble("Ponto x: ");
+    double h = readDouble("Passo h: ");
 
     std::cout << std::fixed << std::setprecision(10);
 
-    // ---- Diferenças Finitas ----
     if (metodo == 1)
     {
-        std::cout << "\nTipo:\n";
-        std::cout << "  1 - Forward\n";
-        std::cout << "  2 - Backward\n";
-        std::cout << "  3 - Central\n";
-        int tipo = lerInt("Escolha: ", 1, 3);
-
-        std::cout << "\nOrdem da derivada (1-4):\n";
-        std::cout << "  1 - Formulas individuais (exatas para cada ordem)\n";
-        std::cout << "  2 - Formula recursiva\n";
-        int abord = lerInt("Abordagem: ", 1, 2);
-
-        int ordem = lerInt("Ordem (1 a 4): ", 1, 4);
+        std::cout << "\nTipo:\n  1 - Forward\n  2 - Backward\n  3 - Central\n";
+        int tipo = readInt("Escolha: ", 1, 3);
+        std::cout << "\nAbordagem:\n  1 - Formulas individuais\n  2 - Formula recursiva\n";
+        int abord = readInt("Abordagem: ", 1, 2);
+        int ordem = readInt("Ordem (1 a 4): ", 1, 4);
 
         double resultado = 0.0;
-
         if (abord == 1)
         {
-            // Fórmulas individuais
-            if (tipo == 1) // Forward
+            if (tipo == 1)
             {
                 switch (ordem)
                 {
@@ -113,7 +89,7 @@ void menuDerivacao()
                 }
                 std::cout << "\n[Forward, ordem " << ordem << ", formula individual]\n";
             }
-            else if (tipo == 2) // Backward
+            else if (tipo == 2)
             {
                 switch (ordem)
                 {
@@ -132,7 +108,7 @@ void menuDerivacao()
                 }
                 std::cout << "\n[Backward, ordem " << ordem << ", formula individual]\n";
             }
-            else // Central
+            else
             {
                 switch (ordem)
                 {
@@ -154,7 +130,6 @@ void menuDerivacao()
         }
         else
         {
-            // Fórmulas recursivas
             if (tipo == 1)
             {
                 resultado = forwardRec(x, h, ordem);
@@ -174,27 +149,22 @@ void menuDerivacao()
 
         std::cout << "F'(x) aprox = " << resultado << "\n";
     }
-
-    // ---- Newton ----
     else if (metodo == 2)
     {
         double resultado = secondNewtonDerivation_fourthOrder(x, h);
         std::cout << "\n[Newton - 2a derivada, 4a ordem, forward]\n";
         std::cout << "F''(x) aprox = " << resultado << "\n";
     }
-
-    // ---- Taylor ----
     else
     {
         std::cout << "\nOrdem do erro:\n";
-        std::cout << "  1 - O(h)   — erro linear    (2 pontos, forward)\n";
-        std::cout << "  2 - O(h^2) — erro quadratico (3 pontos, forward)\n";
-        std::cout << "  3 - O(h^3) — erro cubico    (4 pontos, forward)\n";
-        int ordem = lerInt("Escolha: ", 1, 3);
+        std::cout << "  1 - O(h)   - erro linear     (2 pontos, forward)\n";
+        std::cout << "  2 - O(h^2) - erro quadratico (3 pontos, forward)\n";
+        std::cout << "  3 - O(h^3) - erro cubico     (4 pontos, forward)\n";
+        int ordem = readInt("Escolha: ", 1, 3);
 
         derivate d;
         std::string nomeOrdem;
-
         switch (ordem)
         {
         case 1:
@@ -216,5 +186,5 @@ void menuDerivacao()
         std::cout << "Erro estimado = " << d.error << "\n";
     }
 
-    pausar();
+    pause();
 }

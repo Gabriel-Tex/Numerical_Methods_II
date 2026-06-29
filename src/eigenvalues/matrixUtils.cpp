@@ -1,44 +1,44 @@
-#include "../../include/eigenValues/matrizUtils.h"
+#include "../../include/eigenvalues/matrixUtils.h"
 #include <cmath>
 #include <stdexcept>
 #include <iostream>
 #include <iomanip>
 
-Matriz matrizIdentidade(int n)
+Matrix identityMatrix(int n)
 {
-    Matriz I(n, Vetor(n, 0.0));
+    Matrix I(n, Vector(n, 0.0));
     for (int i = 0; i < n; i++)
         I[i][i] = 1.0;
     return I;
 }
 
-Matriz transposta(const Matriz &A)
+Matrix transpose(const Matrix &A)
 {
     int n = (int)A.size();
     int m = (int)A[0].size();
-    Matriz T(m, Vetor(n, 0.0));
+    Matrix T(m, Vector(n, 0.0));
     for (int i = 0; i < n; i++)
         for (int j = 0; j < m; j++)
             T[j][i] = A[i][j];
     return T;
 }
 
-Vetor produtoMatrizVetor(const Matriz &A, const Vetor &v)
+Vector matVecProduct(const Matrix &A, const Vector &v)
 {
     int n = (int)A.size();
-    Vetor resultado(n, 0.0);
+    Vector result(n, 0.0);
     for (int i = 0; i < n; i++)
         for (int j = 0; j < n; j++)
-            resultado[i] += A[i][j] * v[j];
-    return resultado;
+            result[i] += A[i][j] * v[j];
+    return result;
 }
 
-Matriz produtoMatrizes(const Matriz &A, const Matriz &B)
+Matrix matMatProduct(const Matrix &A, const Matrix &B)
 {
     int n = (int)A.size();
     int m = (int)B[0].size();
     int k = (int)B.size();
-    Matriz C(n, Vetor(m, 0.0));
+    Matrix C(n, Vector(m, 0.0));
     for (int i = 0; i < n; i++)
         for (int j = 0; j < m; j++)
             for (int p = 0; p < k; p++)
@@ -46,7 +46,7 @@ Matriz produtoMatrizes(const Matriz &A, const Matriz &B)
     return C;
 }
 
-double normaVetor(const Vetor &v)
+double vecNorm(const Vector &v)
 {
     double s = 0.0;
     for (double x : v)
@@ -54,7 +54,7 @@ double normaVetor(const Vetor &v)
     return std::sqrt(s);
 }
 
-double produtoInterno(const Vetor &a, const Vetor &b)
+double dotProduct(const Vector &a, const Vector &b)
 {
     double s = 0.0;
     for (int i = 0; i < (int)a.size(); i++)
@@ -62,29 +62,29 @@ double produtoInterno(const Vetor &a, const Vetor &b)
     return s;
 }
 
-Vetor normalizaVetor(const Vetor &v)
+Vector normalizeVec(const Vector &v)
 {
-    double norm = normaVetor(v);
-    Vetor u(v.size());
+    double norm = vecNorm(v);
+    Vector u(v.size());
     for (int i = 0; i < (int)v.size(); i++)
         u[i] = v[i] / norm;
     return u;
 }
 
-double somaDosQuadradosDosTermosAbaixoDaDiagonal(const Matriz &A, int n)
+double sumSquaresBelowDiagonal(const Matrix &A, int n)
 {
-    double soma = 0.0;
+    double sum = 0.0;
     for (int i = 1; i < n; i++)
         for (int j = 0; j < i; j++)
-            soma += A[i][j] * A[i][j];
-    return soma;
+            sum += A[i][j] * A[i][j];
+    return sum;
 }
 
-void imprimirMatriz(const Matriz &A, const std::string &nome)
+void printMatrix(const Matrix &A, const std::string &name)
 {
     int n = (int)A.size();
-    if (!nome.empty())
-        std::cout << nome << ":\n";
+    if (!name.empty())
+        std::cout << name << ":\n";
     for (int i = 0; i < n; i++)
     {
         std::cout << "  [";
@@ -98,10 +98,10 @@ void imprimirMatriz(const Matriz &A, const std::string &nome)
     }
 }
 
-void imprimirVetor(const Vetor &v, const std::string &nome)
+void printVector(const Vector &v, const std::string &name)
 {
-    if (!nome.empty())
-        std::cout << nome << ": ";
+    if (!name.empty())
+        std::cout << name << ": ";
     std::cout << "[";
     for (int i = 0; i < (int)v.size(); i++)
     {
@@ -112,16 +112,15 @@ void imprimirVetor(const Vetor &v, const std::string &nome)
     std::cout << "]\n";
 }
 
-void decompLU(const Matriz &A, Matriz &L, Matriz &U)
+void luDecomposition(const Matrix &A, Matrix &L, Matrix &U)
 {
     int n = (int)A.size();
-    L = matrizIdentidade(n);
+    L = identityMatrix(n);
     U = A;
-
     for (int k = 0; k < n; k++)
     {
         if (std::fabs(U[k][k]) < 1e-14)
-            throw std::runtime_error("decompLU: pivô zero — matriz singular ou mal condicionada");
+            throw std::runtime_error("luDecomposition: pivo zero — matriz singular");
         for (int i = k + 1; i < n; i++)
         {
             double m = U[i][k] / U[k][k];
@@ -132,10 +131,10 @@ void decompLU(const Matriz &A, Matriz &L, Matriz &U)
     }
 }
 
-Vetor resolverL(const Matriz &L, const Vetor &b)
+Vector solveLower(const Matrix &L, const Vector &b)
 {
     int n = (int)b.size();
-    Vetor y(n, 0.0);
+    Vector y(n, 0.0);
     for (int i = 0; i < n; i++)
     {
         y[i] = b[i];
@@ -145,10 +144,10 @@ Vetor resolverL(const Matriz &L, const Vetor &b)
     return y;
 }
 
-Vetor resolverU(const Matriz &U, const Vetor &y)
+Vector solveUpper(const Matrix &U, const Vector &y)
 {
     int n = (int)y.size();
-    Vetor x(n, 0.0);
+    Vector x(n, 0.0);
     for (int i = n - 1; i >= 0; i--)
     {
         x[i] = y[i];
@@ -159,24 +158,22 @@ Vetor resolverU(const Matriz &U, const Vetor &y)
     return x;
 }
 
-Vetor solverLU(const Matriz &L, const Matriz &U, const Vetor &b)
+Vector solveLU(const Matrix &L, const Matrix &U, const Vector &b)
 {
-    Vetor y = resolverL(L, b);
-    return resolverU(U, y);
+    return solveUpper(U, solveLower(L, b));
 }
 
-Matriz calcularInversa(const Matriz &A)
+Matrix invertMatrix(const Matrix &A)
 {
     int n = (int)A.size();
-    Matriz L, U;
-    decompLU(A, L, U);
-
-    Matriz inv(n, Vetor(n, 0.0));
+    Matrix L, U;
+    luDecomposition(A, L, U);
+    Matrix inv(n, Vector(n, 0.0));
     for (int j = 0; j < n; j++)
     {
-        Vetor ej(n, 0.0);
+        Vector ej(n, 0.0);
         ej[j] = 1.0;
-        Vetor col = solverLU(L, U, ej);
+        Vector col = solveLU(L, U, ej);
         for (int i = 0; i < n; i++)
             inv[i][j] = col[i];
     }
