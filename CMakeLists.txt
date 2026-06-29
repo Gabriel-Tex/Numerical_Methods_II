@@ -26,6 +26,10 @@ add_executable(methods
     src/pvi/rungeKutta.cpp
     src/pvi/preditorCorretor.cpp
     src/pvi/menuPVI.cpp
+    src/pvc/pvcUtils.cpp
+    src/pvc/diferencasFinitas.cpp
+    src/pvc/elementosFinitos.cpp
+    src/pvc/menuPVC.cpp
 )
 
 target_include_directories(methods PRIVATE include)

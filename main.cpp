@@ -6,6 +6,7 @@
 #include "include/numericalInt/menuIntegracao.h"
 #include "include/eigenValues/menuAutovalores.h"
 #include "include/pvi/menuPVI.h"
+#include "include/pvc/menuPVC.h"
 
 static void limpaTela()
 {
@@ -49,13 +50,14 @@ int main()
         std::cout << "  10 - Jacobi                         \n";
         std::cout << "  11 - QR                             \n";
         std::cout << "──────────────────────────────────────\n";
-        std::cout << "  12 - PVI: Euler / Runge-Kutta /     \n";
-        std::cout << "       Preditor-Corretor              \n";
+        std::cout << "  12 - PVI                            \n";
+        std::cout << "──────────────────────────────────────\n";
+        std::cout << "  13 - PVC                            \n";
         std::cout << "──────────────────────────────────────\n";
         std::cout << "  0 - Sair                            \n";
         std::cout << "══════════════════════════════════════\n";
 
-        int op = lerInt("Opcao: ", 0, 12);
+        int op = lerInt("Opcao: ", 0, 13);
         switch (op)
         {
         case 1:
@@ -93,6 +95,9 @@ int main()
             break;
         case 12:
             menuPVI();
+            break;
+        case 13:
+            menuPVC();
             break;
         case 0:
             std::cout << "Encerrando.\n";
